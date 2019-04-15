@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "c8df7e332b12d7c876123f41d975287cf65c6fef52e03a70c0900786da5f5735"
+            "sha256": "c6dcd6d7725a29af4f08c1c0fcdf885d7ae4702bc70d5349e41839dbb8edde04"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -16,6 +16,14 @@
         ]
     },
     "default": {
+        "cleverhans": {
+            "hashes": [
+                "sha256:b70998704bbb1c9b776c9bb87bf70104bddf4753cd5af5adda5a0ce340bc74c6",
+                "sha256:e9ecc5815788017a5de9f562781f47b78d6151f2a15fe4d2f58ae185a16ab215"
+            ],
+            "index": "pypi",
+            "version": "==3.0.1"
+        },
         "cycler": {
             "hashes": [
                 "sha256:1d8a5ae1ff6c5cf9b93e8811e581232ad8920aeec647c37316ceac982b08cb2d",
@@ -150,11 +158,26 @@
             ],
             "version": "==3.0.3"
         },
+        "mnist": {
+            "hashes": [
+                "sha256:24934fade9fbbd8adc98713ba805282e7e579224e888169bb5c8ab777efa7b54",
+                "sha256:80e2b07992e5cc61e6247751ce8926f6d15ab3ebde1508d9bbc8891a766c7b91"
+            ],
+            "version": "==0.2.2"
+        },
         "networkx": {
             "hashes": [
                 "sha256:8311ddef63cf5c5c5e7c1d0212dd141d9a1fe3f474915281b73597ed5f1d4e3d"
             ],
             "version": "==2.3"
+        },
+        "nose": {
+            "hashes": [
+                "sha256:9ff7c6cc443f8c51994b34a667bbcf45afd6d945be7477b52e97516fd17c53ac",
+                "sha256:dadcddc0aefbf99eea214e0f1232b94f2fa9bd98fa8353711dacb112bfcbbb2a",
+                "sha256:f1bffef9cbc82628f6e7d7b40d7e255aefaa1adb6a1b1d26c69a8b79e6208a98"
+            ],
+            "version": "==1.3.7"
         },
         "numpy": {
             "hashes": [
@@ -214,6 +237,13 @@
                 "sha256:e6c0bbf8e277b74196e3140c35f9a1ae3eafd818f7f2d3a15819c49135d6c062"
             ],
             "version": "==6.0.0"
+        },
+        "pycodestyle": {
+            "hashes": [
+                "sha256:95a2219d12372f05704562a14ec30bc76b05a5b297b21a5dfe3f6fac3491ae56",
+                "sha256:e40a936c9a450ad81df37f549d676d127b1b66000a6c500caa2b085bc0ca976c"
+            ],
+            "version": "==2.5.0"
         },
         "pyparsing": {
             "hashes": [
@@ -344,6 +374,12 @@
                 "sha256:d16a0141ec1a18405cd4ce8b4613101da75da0e9a7aec5bdd4fa804d0e0eba73"
             ],
             "version": "==1.12.0"
+        },
+        "tensorflow-probability": {
+            "hashes": [
+                "sha256:375439872bbc87867f4cd8048c04454e85221390bd3a704cf688539b425e2aa9"
+            ],
+            "version": "==0.6.0"
         }
     },
     "develop": {}
