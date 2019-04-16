@@ -15,7 +15,7 @@ import numpy as np
 
 from cleverhans.attacks import FastGradientMethod
 from tensorflow.python.platform import flags
-from cleverhans.dataset import MNIST
+from cleverhans.dataset import CIFAR10
 from cleverhans.loss import CrossEntropy
 from cleverhans.train import train
 from cleverhans.utils import AccuracyReport
@@ -71,10 +71,10 @@ def mnist_tutorial(train_start=0, train_end=60000, test_start=0,
     keras.backend.set_session(sess)
 
     # Get MNIST test data
-    mnist = MNIST(train_start=train_start, train_end=train_end,
-                  test_start=test_start, test_end=test_end)
-    x_train, y_train = mnist.get_set('train')
-    x_test, y_test = mnist.get_set('test')
+    cifar10 = CIFAR10(train_start=train_start, train_end=train_end,
+                      test_start=test_start, test_end=test_end)
+    x_train, y_train = cifar10.get_set('train')
+    x_test, y_test = cifar10.get_set('test')
 
     # Obtain Image Parameters
     img_rows, img_cols, nchannels = x_train.shape[1:4]

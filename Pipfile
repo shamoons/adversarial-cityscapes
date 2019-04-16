@@ -4,6 +4,7 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
+autopep8 = "*"
 
 [packages]
 keras = "*"
@@ -11,6 +12,9 @@ segmentation-models = "*"
 numpy = "*"
 cleverhans = "*"
 tensorflow = "*"
+opencv = "*"
+opencv-python = "*"
+pypng = "*"
 
 [requires]
 python_version = "3.7"
