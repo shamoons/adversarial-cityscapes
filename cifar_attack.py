@@ -30,9 +30,10 @@ adv = fgsm.generate(x_test_tensor, **fgsm_params)
 with tf.Session() as sess:
     sess.run(tf.global_variables_initializer())
     asnumpy = sess.run(tf.unstack(adv))
-print(asnumpy)
-for i, image in enumerate(asnumpy):
-    png.from_array(image).save("adversarial_examples/" + i + ".png")
+
+    print(asnumpy)
+    # for i, image in enumerate(asnumpy):
+    #     png.from_array(image).save("adversarial_examples/" + i + ".png")
 
 # # print(adv)
 # i = 0

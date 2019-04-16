@@ -27,7 +27,7 @@ class Model:
         self.model.add(Flatten())
         self.model.add(Dense(512))
         self.model.add(Activation('relu'))
-        self.model.add(Dropout(0.5))
+        self.model.add(Dropout(rate=0.5))
         self.model.add(BatchNormalization())
 
         self.model.add(Dense(num_classes))
