@@ -23,6 +23,18 @@ fgsm_params = {'eps': 0.3,
                'clip_max': 1.
                #    'y_target': np.array([1, 0, 0, 0, 0, 0, 0, 0, 0, 0])
                }
+
+i = 0
+fgsm = FastGradientMethod(wrap)
+adv = fgsm.generate(x_test_tensor, **fgsm_params)
+
+for adv_x in tf.unstack(adv):
+    img = tf.cast(adv_x, dtype=tf.uint8)
+    tf_image = tf.image.encode_jpeg(img)
+    tf.write_file('adversarial_examples/' + str(i) + '.jpg', tf_image)
+    i += 1
+
+quit()
 with tf.Session() as sess:
     sess.run(tf.global_variables_initializer())
     fgsm = FastGradientMethod(wrap, sess=sess)
