@@ -23,13 +23,22 @@ fgsm_params = {'eps': 0.3,
                'clip_max': 1.
                #    'y_target': np.array([1, 0, 0, 0, 0, 0, 0, 0, 0, 0])
                }
-fgsm = FastGradientMethod(wrap)
-adv = fgsm.generate(x_test_tensor, **fgsm_params)
+with tf.Session() as sess:
+    sess.run(tf.global_variables_initializer())
+    fgsm = FastGradientMethod(wrap, sess=sess)
+    adv = fgsm.generate(x_test_tensor, **fgsm_params)
+    print(adv)
+    print(sess.run(adv))
+    quit()
+
+# sess = tf.InteractiveSession()
+# print(adv.eval())
+# quit()
 
 
 with tf.Session() as sess:
     sess.run(tf.global_variables_initializer())
-    asnumpy = sess.run(tf.unstack(adv))
+    asnumpy = sess.run(adv)
 
     print(asnumpy)
     # for i, image in enumerate(asnumpy):
