@@ -12,9 +12,7 @@ segmentation-models = "*"
 numpy = "*"
 cleverhans = "*"
 tensorflow = "*"
-opencv = "*"
-opencv-python = "*"
-pypng = "*"
+imageio = "*"
 
 [requires]
 python_version = "3.7"
