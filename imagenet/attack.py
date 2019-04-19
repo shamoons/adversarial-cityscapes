@@ -9,12 +9,14 @@ import os
 import keras
 import imageio
 import tensorflow as tf
+import glob
+
 
 num_classes = 1000
 
 X = []
-images = ['images/dog1.jpg', 'images/image_0001.jpg']
-for image_path in images:
+file_list = glob.glob("images/*.jpg")
+for image_path in file_list:
     img = image.load_img(image_path, target_size=(224, 224))
     x = image.img_to_array(img)
     x = x.astype('float32')
@@ -31,8 +33,8 @@ target = np.repeat(target, len(X), axis=0)
 
 fgsm_params = {
     'eps': 0.05,
-    'clip_min': 0.,
-    'clip_max': 1.,
+    # 'clip_min': 0.,
+    # 'clip_max': 1.,
     'y_target': target
 }
 
@@ -51,6 +53,7 @@ with tf.Session() as sess:
 
         asnumpy *= 255
         asnumpy = asnumpy.astype('uint8')
+
         imageio.imwrite("adversarial_examples/" +
                         str(i) + ".adv.png", asnumpy)
 
