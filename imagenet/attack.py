@@ -17,8 +17,9 @@ images = ['images/dog1.jpg', 'images/image_0001.jpg']
 for image_path in images:
     img = image.load_img(image_path, target_size=(224, 224))
     x = image.img_to_array(img)
-    x = np.expand_dims(x, axis=0)
-    x = preprocess_input(x)
+    x = x.astype('float32')
+    x /= 255
+
     X.append(x)
 
 model = Model().model
@@ -30,24 +31,19 @@ target = np.repeat(target, len(X), axis=0)
 
 fgsm_params = {
     'eps': 0.05,
-    # 'clip_min': 0.,
-    # 'clip_max': 1.,
+    'clip_min': 0.,
+    'clip_max': 1.,
     'y_target': target
 }
 
 X = np.array(X)
 
 x_tensor = K.variable(X)
-print(type(X))
-print(X.shape)
 with tf.Session() as sess:
     sess.run(tf.global_variables_initializer())
     fgsm = FastGradientMethod(wrap, sess=sess)
     adv = fgsm.generate(x_tensor, **fgsm_params)
 
-    print('Done creating examples')
-    quit()
-
     i = 0
     for adv_x in tf.unstack(adv):
         print('Saving: ', i)
@@ -55,57 +51,7 @@ with tf.Session() as sess:
 
         asnumpy *= 255
         asnumpy = asnumpy.astype('uint8')
-
-        original_image = x_test[i] * 255
-        original_image = original_image.astype('uint8')
-
-        imageio.imwrite("../adversarial_examples/" +
+        imageio.imwrite("adversarial_examples/" +
                         str(i) + ".adv.png", asnumpy)
-        imageio.imwrite("../adversarial_examples/" +
-                        str(i) + ".png", original_image)
-
-        i += 1
-
-
-quit()
-
-
-x_test_tensor = K.variable(x_test)
-
-model = Model(input_shape=x_train.shape[1:], num_classes=num_classes).model
-wrap = KerasModelWrapper(model)
-
-target = keras.utils.to_categorical([0], num_classes)
-target = np.repeat(target, 10000, axis=0)
-
-fgsm_params = {
-    'eps': 0.05,
-    'clip_min': 0.,
-    'clip_max': 1.,
-    'y_target': target
-}
-
-with tf.Session() as sess:
-    sess.run(tf.global_variables_initializer())
-    fgsm = FastGradientMethod(wrap, sess=sess)
-    adv = fgsm.generate(x_test_tensor, **fgsm_params)
-
-    print('Done creating examples')
-
-    i = 0
-    for adv_x in tf.unstack(adv):
-        print('Saving: ', i)
-        asnumpy = sess.run(adv_x)
-
-        asnumpy *= 255
-        asnumpy = asnumpy.astype('uint8')
-
-        original_image = x_test[i] * 255
-        original_image = original_image.astype('uint8')
-
-        imageio.imwrite("../adversarial_examples/" +
-                        str(i) + ".adv.png", asnumpy)
-        imageio.imwrite("../adversarial_examples/" +
-                        str(i) + ".png", original_image)
 
         i += 1
