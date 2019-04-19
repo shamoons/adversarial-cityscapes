@@ -3,7 +3,7 @@ from keras.preprocessing import image
 from inet import Model
 import numpy as np
 
-images = ['images/dog1.jpg', 'images/image_0001.jpg']
+images = ['images/dog1.jpg', 'images/image_0001.jpg', 'images/image_0005.jpg']
 model = Model()
 
 for image_path in images:

@@ -21,7 +21,7 @@ for image_path in images:
     x = preprocess_input(x)
     X.append(x)
 
-model = Model()
+model = Model().model
 wrap = KerasModelWrapper(model)
 
 target = [np.zeros((1000,))]
@@ -35,7 +35,11 @@ fgsm_params = {
     'y_target': target
 }
 
+X = np.array(X)
+
 x_tensor = K.variable(X)
+print(type(X))
+print(X.shape)
 with tf.Session() as sess:
     sess.run(tf.global_variables_initializer())
     fgsm = FastGradientMethod(wrap, sess=sess)
