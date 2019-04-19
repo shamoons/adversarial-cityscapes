@@ -4,7 +4,7 @@ import numpy as np
 import glob
 
 file_list = glob.glob("adversarial_examples/*.jpg")
-# file_list = glob.glob("images/*.jpg")
+file_list = glob.glob("images/*.jpg")
 
 model = ResNet50(weights='imagenet')
 
