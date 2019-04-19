@@ -26,15 +26,15 @@ for image_path in file_list:
 model = ResNet50(weights='imagenet')
 wrap = KerasModelWrapper(model)
 
-# target = [np.zeros((1000,))]
-# target[0][0] = 1
-# target = np.repeat(target, len(X), axis=0)
+target = [np.zeros((1000,))]
+target[0][0] = 1
+target = np.repeat(target, len(X), axis=0)
 
 fgsm_params = {
-    'eps': 0.35,
+    'eps': 0.25,
     'clip_min': 0.,
     'clip_max': 1.,
-    # 'y_target': target
+    'y_target': target
 }
 
 X = np.array(X)
@@ -47,13 +47,13 @@ with tf.Session() as sess:
 
     i = 0
     for adv_x in tf.unstack(adv):
-        print('Saving: ', i)
+        print('Saving: ', i, file_list[i])
         asnumpy = sess.run(adv_x)
 
         asnumpy *= 255
         asnumpy = asnumpy.astype('uint8')
 
-        imageio.imwrite("adversarial_examples/" +
-                        str(i) + ".adv.png", asnumpy)
+        imageio.imwrite("adversarial_examples/" + os.path.splitext(
+            os.path.basename(file_list[i]))[0] + ".jpg", asnumpy)
 
         i += 1
