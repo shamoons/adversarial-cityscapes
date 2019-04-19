@@ -1,9 +1,8 @@
-from inet import Model
 from cleverhans.attacks import FastGradientMethod
 from cleverhans.utils_keras import KerasModelWrapper
 from keras import backend as K
 from keras.preprocessing import image
-from keras.applications.resnet50 import preprocess_input, decode_predictions
+from keras.applications.resnet50 import preprocess_input, decode_predictions, ResNet50
 import numpy as np
 import os
 import keras
@@ -24,7 +23,7 @@ for image_path in file_list:
 
     X.append(x)
 
-model = Model().model
+model = ResNet50(weights='imagenet')
 wrap = KerasModelWrapper(model)
 
 target = [np.zeros((1000,))]
@@ -32,9 +31,9 @@ target[0][0] = 1
 target = np.repeat(target, len(X), axis=0)
 
 fgsm_params = {
-    'eps': 0.05,
-    # 'clip_min': 0.,
-    # 'clip_max': 1.,
+    'eps': 0.3,
+    'clip_min': 0.,
+    'clip_max': 1.,
     'y_target': target
 }
 
