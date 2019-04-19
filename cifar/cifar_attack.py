@@ -51,8 +51,9 @@ with tf.Session() as sess:
         original_image = x_test[i] * 255
         original_image = original_image.astype('uint8')
 
-        imageio.imwrite("adversarial_examples/" + str(i) + ".adv.png", asnumpy)
-        imageio.imwrite("adversarial_examples/" +
+        imageio.imwrite("../adversarial_examples/" +
+                        str(i) + ".adv.png", asnumpy)
+        imageio.imwrite("../adversarial_examples/" +
                         str(i) + ".png", original_image)
 
         i += 1
