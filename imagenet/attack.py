@@ -26,15 +26,15 @@ for image_path in file_list:
 model = ResNet50(weights='imagenet')
 wrap = KerasModelWrapper(model)
 
-target = [np.zeros((1000,))]
-target[0][0] = 1
-target = np.repeat(target, len(X), axis=0)
+# target = [np.zeros((1000,))]
+# target[0][0] = 1
+# target = np.repeat(target, len(X), axis=0)
 
 fgsm_params = {
-    'eps': 0.3,
+    'eps': 0.35,
     'clip_min': 0.,
     'clip_max': 1.,
-    'y_target': target
+    # 'y_target': target
 }
 
 X = np.array(X)

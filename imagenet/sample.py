@@ -1,12 +1,10 @@
-from keras.applications.resnet50 import ResNet50, preprocess_input, decode_predictions
 from keras.preprocessing import image
-import numpy as np
+from keras.applications.resnet50 import ResNet50, decode_predictions
 import glob
-
-# file_list = glob.glob("adversarial_examples/*.png")
-file_list = glob.glob("images/*.jpg")
+import numpy as np
 
 model = ResNet50(weights='imagenet')
+file_list = glob.glob("adversarial_examples/*.png")
 
 for image_path in file_list:
     img = image.load_img(image_path, target_size=(224, 224))
