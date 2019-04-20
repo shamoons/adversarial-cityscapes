@@ -31,10 +31,10 @@ target[0][0] = 1
 target = np.repeat(target, len(X), axis=0)
 
 fgsm_params = {
-    'eps': 0.2,
+    'eps': 0.15,
     'clip_min': 0.,
     'clip_max': 1.,
-    'y_target': target
+    # 'y_target': target
 }
 
 X = np.array(X)
